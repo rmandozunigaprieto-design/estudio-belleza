@@ -5,110 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudio de Belleza Armaliet</title>
     <style>
-        /* Paleta 100% Rosa con fondo preparado para resaltar el blanco */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffb6c1; /* Rosa un poco más vivo para que la flor blanca contraste hermoso */
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            overflow-x: hidden; /* Evita que la pantalla se mueva a los lados por las flores */
-        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #ffb6c1; text-align: center; margin: 0; padding: 20px; overflow-x: hidden; }
+        header { background-color: #ff9cbd; padding: 30px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h1 { color: #5c001f; margin: 0; }
         
-        /* El contenido lo ponemos en una capa superior (z-index) para que resalte sobre las flores */
-        header {
-            background-color: #ff9cbd;
-            padding: 50px 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-            position: relative;
-            z-index: 10;
-        }
-        h1 {
-            margin: 0;
-            color: #5c001f; 
-            font-size: 2.8em;
-            letter-spacing: 1px;
-        }
-        main {
-            padding: 60px 20px;
-            position: relative;
-            z-index: 10;
-        }
-        p {
-            font-size: 1.3em;
-            color: #4a1525; 
-            margin-bottom: 40px;
-            font-weight: 500;
-        }
-        button {
-            background-color: #e62e6b; 
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            font-size: 1.2em;
-            font-weight: bold;
-            border-radius: 30px; 
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-        button:hover {
-            background-color: #bf1750; 
-            transform: translateY(-2px); 
-        }
-
-        /* --- LA MAGIA DE LAS FLORES (CSS) --- */
-        .flor {
-            position: fixed;
-            top: -10%;
-            color: white;
-            font-size: 1.8em; /* Tamaño de la flor */
-            z-index: 1; /* Se quedan detrás del texto principal */
-            pointer-events: none; /* Modo fantasma: no estorban los clics */
-            animation: caer linear forwards;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.9); /* Brillo blanco alrededor */
-        }
-
-        /* Animación de caída y giro */
-        @keyframes caer {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-        }
+        .seccion { background: white; margin: 12px auto; width: 90%; max-width: 500px; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: transform 0.2s; }
+        .seccion:hover { transform: scale(1.02); }
+        .titulo-seccion { background: #e62e6b; color: white; padding: 18px; cursor: pointer; font-weight: bold; font-size: 1.1em; }
+        .contenido { display: none; padding: 20px; color: #4a1525; text-align: left; line-height: 1.6; }
+        
+        .flor { position: fixed; top: -10%; color: white; font-size: 1.5em; z-index: 1; pointer-events: none; animation: caer linear forwards; }
+        @keyframes caer { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
     </style>
 </head>
 <body>
     <header>
         <h1>Estudio de Belleza Armaliet</h1>
     </header>
-    <main>
-        <p>Expertas en diseño de pestañas y tratamientos láser en San Luis Potosí.</p>
-        <button onclick="alert('¡Próximamente conectaremos esto al Chatbot de citas!')">Agendar Cita</button>
-    </main>
 
-    <!-- --- LA MAGIA DE LAS FLORES (JAVASCRIPT) --- -->
+    <!-- Política -->
+    <div class="seccion">
+        <div class="titulo-seccion" onclick="toggle(this)">▼ Políticas de Citas</div>
+        <div class="contenido">
+            • Se requiere anticipo del 50% para apartar tu lugar.<br>
+            • Tolerancia máxima de 10 minutos.<br>
+            • Favor de avisar con 24 horas de anticipación para cambios.
+        </div>
+    </div>
+
+    <!-- Pestañas -->
+    <div class="seccion">
+        <div class="titulo-seccion" onclick="toggle(this)">▼ Pestañas (Ejemplo)</div>
+        <div class="contenido">
+            • Clásicas: $450<br>
+            • Volumen Ruso: $650<br>
+            • Lifting de Pestañas: $400
+        </div>
+    </div>
+
+    <!-- Uñas -->
+    <div class="seccion">
+        <div class="titulo-seccion" onclick="toggle(this)">▼ Uñas (Ejemplo)</div>
+        <div class="contenido">
+            • Set Básico: $350<br>
+            • Acrílico Escultural: $500<br>
+            • Gelish: $250
+        </div>
+    </div>
+
     <script>
+        function toggle(el) {
+            let contenido = el.nextElementSibling;
+            contenido.style.display = (contenido.style.display === "block") ? "none" : "block";
+        }
         function crearFlor() {
             const flor = document.createElement('div');
             flor.classList.add('flor');
-            flor.innerText = '✿'; // Símbolo de la flor
-            
-            // Posición horizontal aleatoria (de lado a lado de la pantalla)
+            flor.innerText = '✿';
             flor.style.left = Math.random() * 100 + 'vw';
-            
-            // Velocidad de caída aleatoria (entre 4 y 8 segundos para que se vea natural)
             flor.style.animationDuration = Math.random() * 4 + 4 + 's';
-            
-            // Agregamos la flor a la página
             document.body.appendChild(flor);
-            
-            // Borramos la flor después de 8 segundos para no saturar la memoria del celular
-            setTimeout(() => {
-                flor.remove();
-            }, 8000);
+            setTimeout(() => { flor.remove(); }, 8000);
         }
-
-        // Crear una flor nueva cada 400 milisegundos
-        setInterval(crearFlor, 400);
+        setInterval(crearFlor, 1000);
     </script>
 </body>
 </html>
