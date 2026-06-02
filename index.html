@@ -7,103 +7,63 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #ffb6c1; text-align: center; margin: 0; padding: 20px; overflow-x: hidden; }
+        header { background-color: #ff9cbd; padding: 70px 20px 20px 20px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; position: relative; }
+        h1 { color: #5c001f; margin: 0; font-family: 'Pacifico', cursive; font-size: 2em; }
         
-        header { background-color: #ff9cbd; padding: 90px 20px 30px 20px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; position: relative; }
-        
-        .logo-estudio { 
-            position: absolute; top: 15px; left: 15px; max-width: 60px; 
-            border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.6); 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        /* Ruleta */
+        .contenedor-ruleta { display: flex; flex-direction: column; align-items: center; margin: 20px auto; }
+        .ruleta { 
+            width: 250px; height: 250px; border-radius: 50%; 
+            background: conic-gradient(#ff6f9c 0deg 72deg, #ff9cbd 72deg 144deg, #ffb6c1 144deg 216deg, #e62e6b 216deg 288deg, #5c001f 288deg 360deg);
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+            border: 5px solid white; box-shadow: 0 0 20px rgba(0,0,0,0.2);
         }
-        
-        h1 { color: #5c001f; margin: 0; font-family: 'Pacifico', cursive; font-size: 2.2em; }
-        
-        /* ANIMACIÓN LOCA (3 Segundos) */
-        @keyframes moverseLoco {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(10px, -10px); }
-            50% { transform: translate(-10px, 10px); }
-            75% { transform: translate(10px, 5px); }
-            100% { transform: translate(0, 0); }
+        .boton-girar { 
+            margin-top: 20px; padding: 15px 40px; background: #5c001f; color: white; border: none; border-radius: 50px; 
+            font-family: 'Pacifico', cursive; font-size: 1.2em; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        /* Estilo de los botones largos */
-        .seccion { 
-            background: white; 
-            margin: 15px auto; 
-            width: 90%; max-width: 500px; 
-            border-radius: 50px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
-            cursor: pointer;
-            animation: moverseLoco 3s ease-in-out infinite;
-        }
-        
-        .titulo-seccion { 
-            color: #e62e6b; padding: 18px; font-weight: bold; font-family: 'Pacifico', cursive; font-size: 1.2em;
-        }
-        
-        .contenido { display: none; padding: 0 20px 20px 20px; color: #4a1525; font-size: 1em; line-height: 1.5; }
-        
-        /* Botón de Agendar (WhatsApp Integrado) */
-        .boton-cita { 
-            background-color: #5c001f; color: white; border: none; padding: 18px 35px; 
-            font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; 
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2); margin: 30px auto; display: block;
-            font-family: 'Pacifico', cursive;
-            animation: moverseLoco 3s ease-in-out infinite;
-        }
-        
-        .seccion:hover, .boton-cita:hover { 
-            animation: none; 
-            transform: scale(1.03); 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        .flor { position: fixed; top: -10%; color: white; font-size: 1.5em; z-index: 1; pointer-events: none; animation: caer linear forwards; }
-        @keyframes caer { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+        /* Lo demás igual */
+        @keyframes moverseLoco { 0% { transform: translate(0, 0); } 50% { transform: translate(5px, -5px); } 100% { transform: translate(0, 0); } }
+        .seccion { background: white; margin: 15px auto; width: 90%; max-width: 500px; border-radius: 50px; cursor: pointer; animation: moverseLoco 3s ease-in-out infinite; }
+        .titulo-seccion { color: #e62e6b; padding: 15px; font-weight: bold; font-family: 'Pacifico', cursive; font-size: 1.1em; }
+        .contenido { display: none; padding: 0 20px 15px 20px; color: #4a1525; font-size: 0.9em; }
+        .boton-cita { background-color: #5c001f; color: white; border: none; padding: 15px 30px; border-radius: 50px; margin: 20px auto; display: block; font-family: 'Pacifico', cursive; animation: moverseLoco 3s ease-in-out infinite; }
+        .seccion:hover, .boton-cita:hover { animation: none; transform: scale(1.03); }
     </style>
 </head>
 <body>
-    <header>
-        <img src="Logo.jpg" alt="Logo Estudio" class="logo-estudio">
-        <h1>Estudio de Belleza Armaliet</h1>
-    </header>
+    <header><h1>Estudio de Belleza Armaliet</h1></header>
 
-    <div class="seccion" onclick="toggle(this)">
-        <div class="titulo-seccion">▼ Políticas de Citas</div>
-        <div class="contenido">Anticipo del 50%.<br>Tolerancia máxima 10 min.<br>Favor de avisar con 24h de anticipación.</div>
+    <!-- Ruleta -->
+    <div class="contenedor-ruleta">
+        <div class="ruleta" id="ruleta"></div>
+        <button class="boton-girar" onclick="girar()">¡Girar Ruleta!</button>
     </div>
 
-    <div class="seccion" onclick="toggle(this)">
-        <div class="titulo-seccion">▼ Pestañas</div>
-        <div class="contenido">Clásicas: $450<br>Volumen Ruso: $650<br>Lifting: $400</div>
-    </div>
+    <div class="seccion" onclick="toggle(this)"><div class="titulo-seccion">▼ Políticas</div><div class="contenido">Anticipo 50%. Tolerancia 10 min. Avisar 24h antes.</div></div>
+    <div class="seccion" onclick="toggle(this)"><div class="titulo-seccion">▼ Pestañas</div><div class="contenido">Clásicas: $450 | Vol: $650 | Lift: $400</div></div>
+    <div class="seccion" onclick="toggle(this)"><div class="titulo-seccion">▼ Uñas</div><div class="contenido">Básico: $350 | Acrílico: $500 | Gel: $250</div></div>
 
-    <div class="seccion" onclick="toggle(this)">
-        <div class="titulo-seccion">▼ Uñas</div>
-        <div class="contenido">Set Básico: $350<br>Acrílico: $500<br>Gelish: $250</div>
-    </div>
-
-    <!-- Botón directo a WhatsApp -->
-    <button class="boton-cita" onclick="window.open('https://wa.me/524443372745?text=¡Hola!%20Vengo%20de%20la%20página%20de%20Estudio%20Armaliet%20y%20me%20gustaría%20agendar%20una%20cita.', '_blank')">
+    <button class="boton-cita" onclick="window.open('https://wa.me/524443372745?text=¡Hola!%20Gané%20un%20premio%20en%20la%20ruleta%20y%20quiero%20agendar.', '_blank')">
         Agendar Cita Ahora
     </button>
 
     <script>
-        function toggle(el) {
-            let contenido = el.querySelector('.contenido');
-            contenido.style.display = (contenido.style.display === "block") ? "none" : "block";
+        function toggle(el) { el.querySelector('.contenido').style.display = (el.querySelector('.contenido').style.display === "block") ? "none" : "block"; }
+        
+        let rotacion = 0;
+        function girar() {
+            const ruleta = document.getElementById('ruleta');
+            const premio = Math.floor(Math.random() * 5); // 5 premios
+            rotacion += 1440 + (premio * 72); // 4 vueltas completas + la sección
+            ruleta.style.transform = rotate(${rotacion}deg);
+            
+            setTimeout(() => {
+                const premios = ["10% de descuento", "Diseño extra gratis", "Aplicación a mitad de precio", "Kit de cuidado", "¡Inténtalo de nuevo!"];
+                alert("¡Felicidades! Ganaste: " + premios[premio]);
+            }, 4000);
         }
-        function crearFlor() {
-            const flor = document.createElement('div');
-            flor.classList.add('flor');
-            flor.innerText = '✿';
-            flor.style.left = Math.random() * 100 + 'vw';
-            flor.style.animationDuration = Math.random() * 4 + 4 + 's';
-            document.body.appendChild(flor);
-            setTimeout(() => { flor.remove(); }, 8000);
-        }
-        setInterval(crearFlor, 1000);
     </script>
 </body>
 </html>
