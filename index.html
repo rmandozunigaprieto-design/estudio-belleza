@@ -8,7 +8,7 @@
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #ffb6c1; text-align: center; margin: 0; padding: 20px; overflow-x: hidden; }
         
-        header { background-color: #ff9cbd; padding: 90px 20px 30px 20px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; position: relative; }
+        header { background-color: #ff9cbd; padding: 70px 20px 20px 20px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; position: relative; }
         
         .logo-estudio { 
             position: absolute; top: 15px; left: 15px; max-width: 60px; 
@@ -16,54 +16,37 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
-        h1 { color: #5c001f; margin: 0; font-family: 'Pacifico', cursive; font-size: 2.2em; }
+        h1 { color: #5c001f; margin: 0; font-family: 'Pacifico', cursive; font-size: 2em; }
         
         /* Animación Loca */
         @keyframes moverseLoco {
             0% { transform: translate(0, 0); }
-            25% { transform: translate(10px, -10px); }
-            50% { transform: translate(-10px, 10px); }
-            75% { transform: translate(10px, 5px); }
+            50% { transform: translate(5px, -5px); }
             100% { transform: translate(0, 0); }
         }
 
-        /* Contenedor Ruleta */
+        /* Ruleta */
         .contenedor-ruleta { display: flex; flex-direction: column; align-items: center; margin: 20px auto; }
         .ruleta { 
             width: 250px; height: 250px; border-radius: 50%; 
             background: conic-gradient(#ff6f9c 0deg 72deg, #ff9cbd 72deg 144deg, #ffb6c1 144deg 216deg, #e62e6b 216deg 288deg, #5c001f 288deg 360deg);
             border: 5px solid white; box-shadow: 0 0 20px rgba(0,0,0,0.2);
-            /* Importante: Mover la transición al CSS para mayor estabilidad */
             transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
         }
-        .boton-girar { 
-            margin-top: 20px; padding: 15px 40px; background: #5c001f; color: white; border: none; border-radius: 50px; 
-            font-family: 'Pacifico', cursive; font-size: 1.2em; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
+        .boton-girar { margin-top: 20px; padding: 15px 40px; background: #5c001f; color: white; border: none; border-radius: 50px; font-family: 'Pacifico', cursive; font-size: 1.2em; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
 
-        /* Estilo de los botones/secciones largos */
-        .seccion { 
-            background: white; margin: 15px auto; width: 90%; max-width: 500px; 
-            border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
-            cursor: pointer; animation: moverseLoco 3s ease-in-out infinite;
-            overflow: hidden; /* Asegura que el contenido no se salga al expandirse */
-        }
-        
+        /* Secciones */
+        .seccion { background: white; margin: 15px auto; width: 90%; max-width: 500px; border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); cursor: pointer; animation: moverseLoco 3s ease-in-out infinite; }
         .titulo-seccion { color: #e62e6b; padding: 18px; font-weight: bold; font-family: 'Pacifico', cursive; font-size: 1.2em; }
+        
+        /* CONTENIDO - Oculto por defecto */
         .contenido { display: none; padding: 0 20px 20px 20px; color: #4a1525; font-size: 1em; line-height: 1.5; }
         
-        /* Botón de Agendar */
-        .boton-cita { 
-            background-color: #5c001f; color: white; border: none; padding: 18px 35px; 
-            font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; 
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2); margin: 30px auto; display: block;
-            font-family: 'Pacifico', cursive; animation: moverseLoco 3s ease-in-out infinite;
-        }
-        
-        .seccion:hover, .boton-cita:hover, .boton-girar:hover { animation: none; transform: scale(1.03); }
+        /* Clase para mostrar */
+        .mostrar { display: block !important; }
 
-        .flor { position: fixed; top: -10%; color: white; font-size: 1.5em; z-index: 1; pointer-events: none; animation: caer linear forwards; }
-        @keyframes caer { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+        .boton-cita { background-color: #5c001f; color: white; border: none; padding: 18px 35px; font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 15px rgba(0,0,0,0.2); margin: 30px auto; display: block; font-family: 'Pacifico', cursive; animation: moverseLoco 3s ease-in-out infinite; }
+        .seccion:hover, .boton-cita:hover, .boton-girar:hover { animation: none; transform: scale(1.03); }
     </style>
 </head>
 <body>
@@ -72,13 +55,11 @@
         <h1>Estudio de Belleza Armaliet</h1>
     </header>
 
-    <!-- Ruleta -->
     <div class="contenedor-ruleta">
         <div class="ruleta" id="ruleta"></div>
         <button class="boton-girar" onclick="girar()">¡Girar Ruleta!</button>
     </div>
 
-    <!-- Botones de información -->
     <div class="seccion" onclick="toggle(this)">
         <div class="titulo-seccion">▼ Políticas de Citas</div>
         <div class="contenido">Anticipo del 50%.<br>Tolerancia máxima 10 min.<br>Favor de avisar con 24h de anticipación.</div>
@@ -94,65 +75,28 @@
         <div class="contenido">Set Básico: $350<br>Acrílico: $500<br>Gelish: $250</div>
     </div>
 
-    <!-- Botón de agendar WhatsApp -->
     <button class="boton-cita" onclick="window.open('https://wa.me/524443372745?text=¡Hola!%20Vengo%20de%20la%20página%20de%20Estudio%20Armaliet%20y%20me%20gustaría%20agendar%20una%20cita.', '_blank')">
         Agendar Cita Ahora
     </button>
 
-    <!-- JavaScript - El corazón de la interactividad -->
     <script>
-        // Función para abrir/cerrar la información de los botones
         function toggle(el) {
             let contenido = el.querySelector('.contenido');
-            // Corrección: Aseguramos que la comparación sea directa
-            if (contenido.style.display === "block") {
-                contenido.style.display = "none";
-            } else {
-                contenido.style.display = "block";
-            }
+            contenido.classList.toggle('mostrar');
         }
 
         let rotacion = 0;
-        let girando = false; // Bandera para evitar múltiples giros
-
-        // Función que hace girar la ruleta
         function girar() {
-            if (girando) return; // Si ya está girando, no hacer nada
-            girando = true;
-
             const ruleta = document.getElementById('ruleta');
-            const premioIndex = Math.floor(Math.random() * 5); // 0 al 4
-            
-            // 1440 grados son 4 vueltas completas, luego sumamos el ángulo del premio
+            const premioIndex = Math.floor(Math.random() * 5);
             rotacion += 1440 + (premioIndex * 72); 
-            
             ruleta.style.transform = rotate(${rotacion}deg);
             
-            // Esperamos a que termine la animación (4s) para mostrar el premio
             setTimeout(() => {
-                const premios = [
-                    "¡10% de descuento!", 
-                    "¡Diseño extra gratis!", 
-                    "¡Aplicación a mitad de precio!", 
-                    "¡Kit de cuidado especial!", 
-                    "¡Inténtalo de nuevo!"
-                ];
+                const premios = ["10% de descuento", "Diseño extra gratis", "Aplicación a mitad de precio", "Kit de cuidado", "¡Inténtalo de nuevo!"];
                 alert("¡Felicidades! Ganaste: " + premios[premioIndex]);
-                girando = false; // Permitimos volver a girar
             }, 4000);
         }
-
-        // Animación de las flores
-        function crearFlor() {
-            const flor = document.createElement('div');
-            flor.classList.add('flor');
-            flor.innerText = '✿';
-            flor.style.left = Math.random() * 100 + 'vw';
-            flor.style.animationDuration = Math.random() * 4 + 4 + 's';
-            document.body.appendChild(flor);
-            setTimeout(() => { flor.remove(); }, 8000);
-        }
-        setInterval(crearFlor, 1000);
     </script>
 </body>
 </html>
