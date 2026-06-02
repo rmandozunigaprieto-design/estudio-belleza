@@ -2,17 +2,6 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Prueba Armaliet</title>
-</head>
-<body style="background: pink; text-align: center; padding-top: 50px;">
-    <h1>¡Si ves este título, el código nuevo sí entró!</h1>
-    <button onclick="alert('¡El JavaScript sí funciona!')" style="padding: 20px;">Pícame para probar</button>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudio de Belleza Armaliet</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -49,7 +38,7 @@
             font-family: 'Pacifico', cursive; font-size: 1.2em; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        /* Botones Premium */
+        /* Secciones Premium */
         .seccion { 
             background: white; margin: 15px auto; width: 90%; max-width: 500px; 
             border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
@@ -58,7 +47,9 @@
         
         .titulo-seccion { color: #e62e6b; padding: 18px; font-weight: bold; font-family: 'Pacifico', cursive; font-size: 1.2em; }
         .contenido { display: none; padding: 0 20px 20px 20px; color: #4a1525; font-size: 1em; line-height: 1.5; }
+        .mostrar { display: block !important; }
         
+        /* Botón de Agendar */
         .boton-cita { 
             background-color: #5c001f; color: white; border: none; padding: 18px 35px; 
             font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; 
@@ -67,6 +58,9 @@
         }
         
         .seccion:hover, .boton-cita:hover, .boton-girar:hover { animation: none; transform: scale(1.03); }
+
+        .flor { position: fixed; top: -10%; color: white; font-size: 1.5em; z-index: 1; pointer-events: none; animation: caer linear forwards; }
+        @keyframes caer { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -100,20 +94,16 @@
     </button>
 
     <script>
-        // Toggle mejorado para que no falle
         function toggle(el) {
             let contenido = el.querySelector('.contenido');
-            if (contenido.style.display === "block") {
-                contenido.style.display = "none";
-            } else {
-                contenido.style.display = "block";
-            }
+            contenido.classList.toggle('mostrar');
         }
 
         let rotacion = 0;
         function girar() {
             const ruleta = document.getElementById('ruleta');
             const premioIndex = Math.floor(Math.random() * 5);
+            // Rotación acumulada para que siempre gire hacia adelante
             rotacion += 1440 + (premioIndex * 72); 
             ruleta.style.transform = rotate(${rotacion}deg);
             
@@ -122,6 +112,17 @@
                 alert("¡Felicidades! Ganaste: " + premios[premioIndex]);
             }, 4000);
         }
+
+        function crearFlor() {
+            const flor = document.createElement('div');
+            flor.classList.add('flor');
+            flor.innerText = '✿';
+            flor.style.left = Math.random() * 100 + 'vw';
+            flor.style.animationDuration = Math.random() * 4 + 4 + 's';
+            document.body.appendChild(flor);
+            setTimeout(() => { flor.remove(); }, 8000);
+        }
+        setInterval(crearFlor, 1000);
     </script>
 </body>
 </html>
