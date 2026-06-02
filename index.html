@@ -18,7 +18,7 @@
         
         h1 { color: #5c001f; margin: 0; font-family: 'Pacifico', cursive; font-size: 2.2em; }
         
-        /* ANIMACIÓN LOCA (3 Segundos para que sea fluida) */
+        /* ANIMACIÓN LOCA (3 Segundos) */
         @keyframes moverseLoco {
             0% { transform: translate(0, 0); }
             25% { transform: translate(10px, -10px); }
@@ -32,7 +32,7 @@
             background: white; 
             margin: 15px auto; 
             width: 90%; max-width: 500px; 
-            border-radius: 50px; /* Redondeado tipo cápsula */
+            border-radius: 50px; 
             box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
             cursor: pointer;
             animation: moverseLoco 3s ease-in-out infinite;
@@ -44,7 +44,7 @@
         
         .contenido { display: none; padding: 0 20px 20px 20px; color: #4a1525; font-size: 1em; line-height: 1.5; }
         
-        /* Botón de Agendar (Animado) */
+        /* Botón de Agendar (WhatsApp Integrado) */
         .boton-cita { 
             background-color: #5c001f; color: white; border: none; padding: 18px 35px; 
             font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; 
@@ -53,7 +53,6 @@
             animation: moverseLoco 3s ease-in-out infinite;
         }
         
-        /* Si ponen el mouse/dedo, se detiene la animación y crece un poco */
         .seccion:hover, .boton-cita:hover { 
             animation: none; 
             transform: scale(1.03); 
@@ -85,7 +84,10 @@
         <div class="contenido">Set Básico: $350<br>Acrílico: $500<br>Gelish: $250</div>
     </div>
 
-    <button class="boton-cita" onclick="alert('¡Próximamente agendador de citas!')">Agendar Cita Ahora</button>
+    <!-- Botón directo a WhatsApp -->
+    <button class="boton-cita" onclick="window.open('https://wa.me/524443372745?text=¡Hola!%20Vengo%20de%20la%20página%20de%20Estudio%20Armaliet%20y%20me%20gustaría%20agendar%20una%20cita.', '_blank')">
+        Agendar Cita Ahora
+    </button>
 
     <script>
         function toggle(el) {
