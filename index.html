@@ -24,7 +24,7 @@
         .titulo-seccion { background: white; color: #e62e6b; padding: 18px; font-weight: bold; font-family: 'Pacifico', cursive; font-size: 1.2em; cursor: pointer; }
         .contenido { display: none; padding: 0 20px 20px 20px; color: #4a1525; font-size: 1em; line-height: 1.6; text-align: left; }
         
-        /* Animación suave y elegante para llamar la atención */
+        /* Animación suave para el botón final */
         @keyframes flotar { 0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); } }
         
         .boton-cita { background-color: #5c001f; color: white; border: none; padding: 18px 35px; font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 15px rgba(0,0,0,0.2); margin: 30px auto; display: block; font-family: 'Pacifico', cursive; animation: flotar 3s ease-in-out infinite; }
@@ -75,7 +75,6 @@
     </button>
 
     <script>
-        // Sistema robusto para abrir secciones
         function abrirSeccion(elemento) {
             let contenido = elemento.nextElementSibling;
             if (contenido.style.display === "block") {
@@ -86,14 +85,14 @@
         }
 
         let gradosActuales = 0;
-        let girando = false; // Candado para evitar fallas
+        let girando = false;
         
         function girar() {
             if(girando) return;
             girando = true;
             
             const ruleta = document.getElementById('ruleta');
-            let gradosExtra = Math.floor(Math.random() * 1800) + 1800; // Entre 5 y 10 vueltas
+            let gradosExtra = Math.floor(Math.random() * 1800) + 1800; 
             gradosActuales += gradosExtra;
             ruleta.style.transform = "rotate(" + gradosActuales + "deg)";
             
@@ -101,7 +100,7 @@
                 let premios = ["10% de descuento", "Diseño extra gratis", "Aplicación a mitad de precio", "Kit de cuidado", "¡Inténtalo de nuevo!"];
                 let ganador = Math.floor(Math.random() * premios.length);
                 alert("¡Felicidades! Tu premio es: " + premios[ganador]);
-                girando = false; // Se quita el candado
+                girando = false; 
             }, 4000);
         }
     </script>
