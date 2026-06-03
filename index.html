@@ -24,14 +24,32 @@
         
         .boton-cita { background-color: #5c001f; color: white; border: none; padding: 18px 35px; font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 15px rgba(0,0,0,0.2); margin: 30px auto; display: block; font-family: 'Pacifico', cursive; position: relative; z-index: 10; }
 
-        /* --- CARRUSEL BLINDADO --- */
+        /* --- GALERÍA DESLIZABLE TIPO INSTAGRAM --- */
         .titulo-galeria { color: #5c001f; font-family: 'Pacifico', cursive; font-size: 1.8em; margin-top: 40px; margin-bottom: 10px; }
-        .slider { background: rgba(255, 255, 255, 0.2); height: 220px; margin: auto; overflow: hidden; position: relative; width: 100%; max-width: 800px; border-radius: 20px; margin-bottom: 30px; }
-        .slide-track { animation: scrollInfinito 20s linear infinite; display: flex; width: calc(200px * 8); }
-        .slide { height: 200px; width: 200px; min-width: 200px; flex-shrink: 0; padding: 10px; box-sizing: border-box; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); border: 2px solid white; }
+        
+        .galeria-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 20px;
+            scroll-snap-type: x mandatory; /* Hace que la foto se centre al soltar el dedo */
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Ocultar la barra de scroll para que se vea limpio */
+        .galeria-scroll::-webkit-scrollbar { display: none; }
+        .galeria-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
-        @keyframes scrollInfinito { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-200px * 4)); } }
+        .foto-galeria {
+            flex: 0 0 auto;
+            width: 220px;
+            height: 220px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            scroll-snap-align: center;
+            border: 3px solid white;
+        }
     </style>
 </head>
 <body>
@@ -50,21 +68,16 @@
         </button>
     </div>
 
+    <!-- Título de Galería -->
     <h2 class="titulo-galeria">Nuestro Trabajo</h2>
 
-    <!-- Carrusel usando Logo.jpg como prueba de vida -->
-    <div class="slider">
-        <div class="slide-track">
-            <div class="slide"><img src="Logo.jpg" alt="Trabajo"></div>
-            <div class="slide"><img src="Logo.jpg" alt="Trabajo"></div>
-            <div class="slide"><img src="Logo.jpg" alt="Trabajo"></div>
-            <div class="slide"><img src="Logo.jpg" alt="Trabajo"></div>
-            <!-- Duplicados para el ciclo -->
-            <div class="slide"><img src="Logo.jpg" alt="Trabajo"></div>
-            <div class="slide"><img src="Logo.jpg" alt="Trabajo"></div>
-            <div class="slide"><img src="Logo.jpg" alt="Trabajo"></div>
-            <div class="slide"><img src="Logo.jpg" alt="Trabajo"></div>
-        </div>
+    <!-- Galería Deslizable (Swipe) -->
+    <div class="galeria-scroll">
+        <img src="Logo.jpg" class="foto-galeria" alt="Trabajo 1">
+        <img src="Logo.jpg" class="foto-galeria" alt="Trabajo 2">
+        <img src="Logo.jpg" class="foto-galeria" alt="Trabajo 3">
+        <img src="Logo.jpg" class="foto-galeria" alt="Trabajo 4">
+        <img src="Logo.jpg" class="foto-galeria" alt="Trabajo 5">
     </div>
 
     <div class="seccion">
