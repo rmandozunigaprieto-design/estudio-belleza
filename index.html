@@ -19,12 +19,36 @@
         @keyframes flotar { 0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); } }
         @keyframes flotarSuave { 0% { transform: translateY(0px); } 50% { transform: translateY(-4px); } 100% { transform: translateY(0px); } }
 
-        .seccion { background: white; margin: 15px auto; width: 90%; max-width: 500px; border-radius: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); overflow: hidden; animation: flotarSuave 4s ease-in-out infinite; }
+        /* Contenedor inteligente para PC */
+        .grid-servicios { display: flex; flex-direction: column; align-items: center; gap: 15px; max-width: 1000px; margin: 0 auto; }
+        .seccion { background: white; width: 90%; max-width: 500px; border-radius: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); overflow: hidden; animation: flotarSuave 4s ease-in-out infinite; }
         .titulo-seccion { background: white; color: #e62e6b; padding: 18px; font-weight: bold; font-family: 'Pacifico', cursive; font-size: 1.2em; cursor: pointer; }
         .contenido { display: none; padding: 0 20px 20px 20px; color: #4a1525; font-size: 1em; line-height: 1.6; text-align: left; }
         
+        /* Ajuste para cuando se vea en Computadora (Pantallas anchas) */
+        @media (min-width: 800px) {
+            .grid-servicios { flex-direction: row; justify-content: center; align-items: flex-start; }
+            .seccion { width: 30%; margin: 0; }
+        }
+
         .boton-cita { background-color: #5c001f; color: white; border: none; padding: 18px 35px; font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 15px rgba(0,0,0,0.2); margin: 30px auto; display: block; font-family: 'Pacifico', cursive; animation: flotar 3s ease-in-out infinite; }
         .boton-cotiza { background-color: #ff6f9c; color: white; border: 2px solid white; padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 50px; cursor: pointer; margin: 10px auto; display: block; font-family: 'Pacifico', cursive; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+        /* --- GALERÍA CARRUSEL PRO --- */
+        .titulo-galeria { color: #5c001f; font-family: 'Pacifico', cursive; font-size: 2em; margin-top: 50px; margin-bottom: 10px; }
+        .carrusel-contenedor { width: 100%; overflow: hidden; white-space: nowrap; position: relative; padding: 20px 0; }
+        .carrusel-track { display: inline-block; animation: scrollInfinito 20s linear infinite; }
+        
+        /* Efecto pausa al poner el mouse */
+        .carrusel-track:hover { animation-play-state: paused; }
+        
+        .carrusel-track img { width: 220px; height: 250px; object-fit: cover; border-radius: 20px; margin: 0 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s ease; cursor: pointer; }
+        .carrusel-track img:hover { transform: scale(1.05); }
+
+        @keyframes scrollInfinito {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
     </style>
 </head>
 <body>
@@ -43,19 +67,37 @@
         </button>
     </div>
 
-    <div class="seccion">
-        <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Políticas de Citas</div>
-        <div class="contenido">• Anticipo del 50%.<br>• Tolerancia máxima 10 min.<br>• Favor de avisar con 24h de anticipación.</div>
+    <h2 class="titulo-galeria">Nuestro Trabajo</h2>
+
+    <div class="carrusel-contenedor">
+        <div class="carrusel-track">
+            <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&w=400&q=80" alt="Trabajo 1">
+            <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=400&q=80" alt="Trabajo 2">
+            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=400&q=80" alt="Trabajo 3">
+            <img src="https://images.unsplash.com/photo-1512496015851-a1dc8a471585?auto=format&fit=crop&w=400&q=80" alt="Trabajo 4">
+            
+            <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&w=400&q=80" alt="Trabajo 1">
+            <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=400&q=80" alt="Trabajo 2">
+            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=400&q=80" alt="Trabajo 3">
+            <img src="https://images.unsplash.com/photo-1512496015851-a1dc8a471585?auto=format&fit=crop&w=400&q=80" alt="Trabajo 4">
+        </div>
     </div>
 
-    <div class="seccion">
-        <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Pestañas</div>
-        <div class="contenido">• Clásicas: $450<br>• Volumen Ruso: $650<br>• Lifting: $400</div>
-    </div>
+    <div class="grid-servicios" style="margin-top: 40px;">
+        <div class="seccion">
+            <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Políticas de Citas</div>
+            <div class="contenido">• Anticipo del 50%.<br>• Tolerancia máxima 10 min.<br>• Favor de avisar con 24h de anticipación.</div>
+        </div>
 
-    <div class="seccion">
-        <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Uñas</div>
-        <div class="contenido">• Set Básico: $350<br>• Acrílico: $500<br>• Gelish: $250</div>
+        <div class="seccion">
+            <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Pestañas</div>
+            <div class="contenido">• Clásicas: $450<br>• Volumen Ruso: $650<br>• Lifting: $400</div>
+        </div>
+
+        <div class="seccion">
+            <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Uñas</div>
+            <div class="contenido">• Set Básico: $350<br>• Acrílico: $500<br>• Gelish: $250</div>
+        </div>
     </div>
 
     <button class="boton-cita" onclick="window.open('https://wa.me/524443372745?text=¡Hola!%20Vengo%20de%20la%20página%20de%20Estudio%20Armaliet%20y%20me%20gustaría%20agendar%20una%20cita.', '_blank')">
