@@ -8,12 +8,11 @@
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #ffb6c1; text-align: center; margin: 0; padding: 20px; overflow-x: hidden; }
         
-        /* Logo centrado y elegante */
         header { background-color: #ff9cbd; padding: 45px 20px 20px 20px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 30px; position: relative; margin-top: 40px; }
         .logo-estudio { position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 80px; height: 80px; border-radius: 50%; border: 4px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.2); object-fit: cover; }
         h1 { color: #5c001f; margin: 0; font-family: 'Pacifico', cursive; font-size: 2.2em; }
         
-        /* Ruleta con Flecha */
+        /* Ruleta */
         .contenedor-ruleta { display: flex; flex-direction: column; align-items: center; margin: 20px auto; position: relative; }
         .flecha { width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid #5c001f; position: absolute; top: -15px; z-index: 10; }
         .ruleta { width: 250px; height: 250px; border-radius: 50%; background: conic-gradient(#ff6f9c 0deg 72deg, #ff9cbd 72deg 144deg, #ffb6c1 144deg 216deg, #e62e6b 216deg 288deg, #5c001f 288deg 360deg); border: 5px solid white; box-shadow: 0 0 20px rgba(0,0,0,0.2); transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); }
@@ -23,14 +22,16 @@
         @keyframes flotar { 0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); } }
         @keyframes flotarSuave { 0% { transform: translateY(0px); } 50% { transform: translateY(-4px); } 100% { transform: translateY(0px); } }
 
-        /* Secciones de Servicios Estables pero con vida */
+        /* Secciones y Botones */
         .seccion { background: white; margin: 15px auto; width: 90%; max-width: 500px; border-radius: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); overflow: hidden; animation: flotarSuave 4s ease-in-out infinite; }
         .titulo-seccion { background: white; color: #e62e6b; padding: 18px; font-weight: bold; font-family: 'Pacifico', cursive; font-size: 1.2em; cursor: pointer; }
         .contenido { display: none; padding: 0 20px 20px 20px; color: #4a1525; font-size: 1em; line-height: 1.6; text-align: left; }
         
-        /* Botón final */
         .boton-cita { background-color: #5c001f; color: white; border: none; padding: 18px 35px; font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 15px rgba(0,0,0,0.2); margin: 30px auto; display: block; font-family: 'Pacifico', cursive; animation: flotar 3s ease-in-out infinite; }
-        .boton-cita:hover { transform: scale(1.05); animation: none; }
+        /* Botón de Cotización */
+        .boton-cotiza { background-color: #ff6f9c; color: white; border: 2px solid white; padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 50px; cursor: pointer; margin: 10px auto; display: block; font-family: 'Pacifico', cursive; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        
+        .boton-cita:hover, .boton-cotiza:hover { transform: scale(1.05); animation: none; }
     </style>
 </head>
 <body>
@@ -43,33 +44,26 @@
         <div class="flecha"></div>
         <div class="ruleta" id="ruleta"></div>
         <button class="boton-girar" onclick="girar()">¡Girar Ruleta!</button>
+        
+        <!-- Nuevo botón de Cotización -->
+        <button class="boton-cotiza" onclick="window.open('https://wa.me/524443372745?text=¡Hola!%20Vi%20tu%20página%20y%20me%20gustaría%20cotizar%20tu%20tratamiento,%20bonita.%20¿Me%20podrías%20dar%20información?', '_blank')">
+            Cotiza tu tratamiento, bonita ✨
+        </button>
     </div>
 
     <div class="seccion">
         <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Políticas de Citas</div>
-        <div class="contenido">
-            • Anticipo del 50%.<br>
-            • Tolerancia máxima 10 min.<br>
-            • Favor de avisar con 24h de anticipación.
-        </div>
+        <div class="contenido">• Anticipo del 50%.<br>• Tolerancia máxima 10 min.<br>• Favor de avisar con 24h de anticipación.</div>
     </div>
 
     <div class="seccion">
         <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Pestañas</div>
-        <div class="contenido">
-            • Clásicas: $450<br>
-            • Volumen Ruso: $650<br>
-            • Lifting: $400
-        </div>
+        <div class="contenido">• Clásicas: $450<br>• Volumen Ruso: $650<br>• Lifting: $400</div>
     </div>
 
     <div class="seccion">
         <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Uñas</div>
-        <div class="contenido">
-            • Set Básico: $350<br>
-            • Acrílico: $500<br>
-            • Gelish: $250
-        </div>
+        <div class="contenido">• Set Básico: $350<br>• Acrílico: $500<br>• Gelish: $250</div>
     </div>
 
     <button class="boton-cita" onclick="window.open('https://wa.me/524443372745?text=¡Hola!%20Vengo%20de%20la%20página%20de%20Estudio%20Armaliet%20y%20me%20gustaría%20agendar%20una%20cita.', '_blank')">
@@ -79,11 +73,7 @@
     <script>
         function abrirSeccion(elemento) {
             let contenido = elemento.nextElementSibling;
-            if (contenido.style.display === "block") {
-                contenido.style.display = "none";
-            } else {
-                contenido.style.display = "block";
-            }
+            contenido.style.display = (contenido.style.display === "block") ? "none" : "block";
         }
 
         let gradosActuales = 0;
@@ -92,17 +82,13 @@
         function girar() {
             if(girando) return;
             girando = true;
-            
             const ruleta = document.getElementById('ruleta');
-            let gradosExtra = Math.floor(Math.random() * 1800) + 1800; 
-            gradosActuales += gradosExtra;
+            gradosActuales += 1440 + Math.floor(Math.random() * 360);
             ruleta.style.transform = "rotate(" + gradosActuales + "deg)";
-            
             setTimeout(function() {
                 let premios = ["10% de descuento", "Diseño extra gratis", "Aplicación a mitad de precio", "Kit de cuidado", "¡Inténtalo de nuevo!"];
-                let ganador = Math.floor(Math.random() * premios.length);
-                alert("¡Felicidades! Tu premio es: " + premios[ganador]);
-                girando = false; 
+                alert("¡Felicidades! Tu premio es: " + premios[Math.floor(Math.random() * premios.length)]);
+                girando = false;
             }, 4000);
         }
     </script>
