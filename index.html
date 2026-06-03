@@ -6,112 +6,58 @@
     <title>Estudio Armaliet</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #ffb6c1; text-align: center; margin: 0; padding: 20px; overflow-x: hidden; }
-        header { background-color: #ff9cbd; padding: 45px 20px 20px 20px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 30px; position: relative; margin-top: 40px; }
-        .logo-estudio { position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 80px; height: 80px; border-radius: 50%; border: 4px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.2); object-fit: cover; }
-        h1 { color: #5c001f; margin: 0; font-family: 'Pacifico', cursive; font-size: 2.2em; }
+        body { font-family: sans-serif; background-color: #ffb6c1; text-align: center; padding: 20px; }
+        header { background-color: #ff9cbd; padding: 30px; border-radius: 20px; margin-bottom: 20px; }
+        .logo-estudio { width: 80px; border-radius: 50%; border: 4px solid white; }
         
-        .contenedor-ruleta { display: flex; flex-direction: column; align-items: center; margin: 20px auto; position: relative; z-index: 10; }
-        .flecha { width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid #5c001f; position: absolute; top: -15px; z-index: 15; }
-        .ruleta { width: 250px; height: 250px; border-radius: 50%; background: conic-gradient(#ff6f9c 0deg 72deg, #ff9cbd 72deg 144deg, #ffb6c1 144deg 216deg, #e62e6b 216deg 288deg, #5c001f 288deg 360deg); border: 5px solid white; box-shadow: 0 0 20px rgba(0,0,0,0.2); transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); }
-        .boton-girar { margin-top: 20px; padding: 15px 40px; background: #e62e6b; color: white; border: none; border-radius: 50px; font-family: 'Pacifico', cursive; font-size: 1.2em; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-
-        .boton-cotiza { background-color: #ff6f9c; color: white; border: 2px solid white; padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 50px; cursor: pointer; margin: 10px auto; display: block; font-family: 'Pacifico', cursive; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative; z-index: 10; }
-
-        .seccion { background: white; margin: 15px auto; width: 90%; max-width: 500px; border-radius: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); overflow: hidden; position: relative; z-index: 10; }
-        .titulo-seccion { background: white; color: #e62e6b; padding: 18px; font-weight: bold; font-family: 'Pacifico', cursive; font-size: 1.2em; cursor: pointer; }
-        .contenido { display: none; padding: 0 20px 20px 20px; color: #4a1525; font-size: 1em; line-height: 1.6; text-align: left; }
+        .contenedor-ruleta { margin: 20px 0; }
+        .ruleta { width: 200px; height: 200px; border-radius: 50%; background: conic-gradient(red, yellow, blue); margin: 0 auto; transition: transform 4s; }
         
-        .boton-cita { background-color: #5c001f; color: white; border: none; padding: 18px 35px; font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 15px rgba(0,0,0,0.2); margin: 30px auto; display: block; font-family: 'Pacifico', cursive; position: relative; z-index: 10; }
-
-        /* --- GALERÍA DESLIZABLE TIPO INSTAGRAM --- */
-        .titulo-galeria { color: #5c001f; font-family: 'Pacifico', cursive; font-size: 1.8em; margin-top: 40px; margin-bottom: 10px; }
-        
-        .galeria-scroll {
-            display: flex;
-            overflow-x: auto;
-            gap: 15px;
-            padding: 20px;
-            scroll-snap-type: x mandatory; /* Hace que la foto se centre al soltar el dedo */
-            -webkit-overflow-scrolling: touch;
+        /* ESTO ES LA GALERÍA DE PRUEBA - TIENE QUE VERSE EL BORDE ROJO */
+        .galeria-debug { 
+            border: 5px solid red; 
+            margin: 30px 0; 
+            padding: 20px; 
+            background: white; 
+            display: flex; 
+            overflow-x: scroll; 
+            gap: 10px;
         }
+        .foto-test { width: 150px; height: 150px; background: grey; border-radius: 10px; }
         
-        /* Ocultar la barra de scroll para que se vea limpio */
-        .galeria-scroll::-webkit-scrollbar { display: none; }
-        .galeria-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-
-        .foto-galeria {
-            flex: 0 0 auto;
-            width: 220px;
-            height: 220px;
-            border-radius: 20px;
-            object-fit: cover;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            scroll-snap-align: center;
-            border: 3px solid white;
-        }
+        .seccion { background: white; margin: 15px auto; padding: 15px; border-radius: 20px; }
+        .boton { padding: 15px 30px; background: #5c001f; color: white; border: none; border-radius: 20px; cursor: pointer; margin: 10px; }
     </style>
 </head>
 <body>
+
     <header>
-        <img src="Logo.jpg" alt="Logo Estudio" class="logo-estudio">
+        <img src="Logo.jpg" alt="Logo" class="logo-estudio">
         <h1>Estudio Armaliet</h1>
     </header>
 
     <div class="contenedor-ruleta">
-        <div class="flecha"></div>
         <div class="ruleta" id="ruleta"></div>
-        <button class="boton-girar" onclick="girar()">¡Girar Ruleta!</button>
-        
-        <button class="boton-cotiza" onclick="window.open('https://wa.me/524443372745?text=Hola%20vi%20tu%20página%20y%20me%20gustaría%20cotizar%20un%20tratamiento.%20Aquí%20te%20dejo%20mis%20datos:%0A%0A👤%20Nombre:%0A💅%20Servicio:%0A📅%20Fecha%20ideal:', '_blank')">
-            Cotiza tu tratamiento ✨
-        </button>
+        <button class="boton" onclick="girar()">¡Girar!</button>
     </div>
 
-    <!-- Título de Galería -->
-    <h2 class="titulo-galeria">Nuestro Trabajo</h2>
-
-    <!-- Galería Deslizable (Swipe) -->
-    <div class="galeria-scroll">
-        <img src="Logo.jpg" class="foto-galeria" alt="Trabajo 1">
-        <img src="Logo.jpg" class="foto-galeria" alt="Trabajo 2">
-        <img src="Logo.jpg" class="foto-galeria" alt="Trabajo 3">
-        <img src="Logo.jpg" class="foto-galeria" alt="Trabajo 4">
-        <img src="Logo.jpg" class="foto-galeria" alt="Trabajo 5">
+    <!-- AQUÍ ESTÁ LA GALERÍA - TIENE QUE SALIR UN BORDE ROJO -->
+    <div class="galeria-debug">
+        <h2>GALERÍA DE PRUEBA:</h2>
+        <img src="Logo.jpg" class="foto-test">
+        <img src="Logo.jpg" class="foto-test">
+        <img src="Logo.jpg" class="foto-test">
     </div>
 
-    <div class="seccion">
-        <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Políticas de Citas</div>
-        <div class="contenido">• Anticipo del 50%.<br>• Tolerancia máxima 10 min.<br>• Favor de avisar con 24h de anticipación.</div>
+    <div class="seccion" onclick="this.querySelector('.contenido').style.display='block'">
+        <div>▼ Servicios</div>
+        <div class="contenido" style="display:none;">Pestañas y Uñas</div>
     </div>
 
-    <div class="seccion">
-        <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Pestañas</div>
-        <div class="contenido">• Clásicas: $450<br>• Volumen Ruso: $650<br>• Lifting: $400</div>
-    </div>
-
-    <div class="seccion">
-        <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Uñas</div>
-        <div class="contenido">• Set Básico: $350<br>• Acrílico: $500<br>• Gelish: $250</div>
-    </div>
-
-    <button class="boton-cita" onclick="window.open('https://wa.me/524443372745?text=¡Hola!%20Vengo%20de%20la%20página%20de%20Estudio%20Armaliet%20y%20me%20gustaría%20agendar%20una%20cita.', '_blank')">
-        Agendar Cita Ahora
-    </button>
+    <button class="boton" onclick="window.open('https://wa.me/524443372745', '_blank')">Agendar</button>
 
     <script>
-        function abrirSeccion(elemento) {
-            let contenido = elemento.nextElementSibling;
-            contenido.style.display = (contenido.style.display === "block") ? "none" : "block";
-        }
-        function girar() {
-            const ruleta = document.getElementById('ruleta');
-            let grados = 1440 + Math.floor(Math.random() * 360);
-            ruleta.style.transform = "rotate(" + grados + "deg)";
-            setTimeout(function() {
-                alert("¡Felicidades! Gira de nuevo para ver tu premio.");
-            }, 4000);
-        }
+        function girar() { document.getElementById('ruleta').style.transform = "rotate(1440deg)"; }
     </script>
 </body>
 </html>
