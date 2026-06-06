@@ -43,17 +43,24 @@
         .slide img { width: 100%; height: 100%; object-fit: cover; border-radius: 15px; border: 2px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-800px); } }
 
-        /* Botones */
-        .boton-base { padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 50px; cursor: pointer; margin: 10px auto; display: block; font-family: 'Pacifico', cursive; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative; z-index: 10; }
-        .boton-cotiza { background-color: #ff6f9c; color: white; }
-        .boton-cita { background-color: #5c001f; color: white; padding: 18px 40px; font-size: 1.2em; margin: 30px auto; }
+        /* --- NUEVO: ESTILOS BANNER PROMO FLASH --- */
+        .banner-promo { background: linear-gradient(45deg, #e62e6b, #5c001f); color: white; margin: 25px auto; width: 90%; max-width: 500px; border-radius: 15px; padding: 20px 15px; box-shadow: 0 4px 15px rgba(230, 46, 107, 0.5); position: relative; z-index: 10; animation: latidoPromo 2s infinite; border: 2px solid #ff9cbd; }
+        .titulo-promo { font-family: 'Pacifico', cursive; font-size: 1.5em; margin: 0 0 10px 0; color: #ffebf0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+        .texto-promo { font-size: 1.1em; margin: 0 0 15px 0; font-weight: bold; }
+        .contador { font-size: 1.8em; font-family: 'Courier New', Courier, monospace; font-weight: bold; background: rgba(0,0,0,0.4); padding: 8px 15px; border-radius: 10px; display: inline-block; letter-spacing: 2px; border: 1px solid rgba(255,255,255,0.2); }
+        @keyframes latidoPromo { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
-        /* --- NUEVO: ESTILOS DEL QUIZ --- */
+        /* Estilos del Quiz */
         .seccion-quiz { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 2px dashed #ff6f9c; margin: 30px auto; width: 90%; max-width: 500px; border-radius: 25px; padding: 25px 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; z-index: 10; }
         .titulo-quiz { color: #5c001f; font-family: 'Pacifico', cursive; font-size: 1.4em; margin-top: 0; margin-bottom: 15px; }
         .btn-quiz { background: white; color: #e62e6b; border: 2px solid #e62e6b; padding: 12px 20px; margin: 8px auto; border-radius: 20px; cursor: pointer; font-weight: bold; width: 85%; display: block; transition: 0.3s; font-size: 1em; }
         .btn-quiz:hover { background: #e62e6b; color: white; transform: scale(1.05); }
         .texto-resultado { color: #4a1525; font-size: 1.1em; font-weight: bold; margin-bottom: 20px; }
+
+        /* Botones Generales */
+        .boton-base { padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 50px; cursor: pointer; margin: 10px auto; display: block; font-family: 'Pacifico', cursive; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative; z-index: 10; }
+        .boton-cotiza { background-color: #ff6f9c; color: white; }
+        .boton-cita { background-color: #5c001f; color: white; padding: 18px 40px; font-size: 1.2em; margin: 30px auto; }
     </style>
 </head>
 <body class="fade-in">
@@ -88,7 +95,15 @@
         </div>
     </div>
 
-    <!-- --- NUEVO: SECCIÓN DEL QUIZ --- -->
+    <!-- --- NUEVO: BANNER PROMO FLASH --- -->
+    <div class="banner-promo">
+        <h3 class="titulo-promo">⚡ Promo Relámpago ⚡</h3>
+        <p class="texto-promo">15% de descuento en Volumen Ruso</p>
+        <div class="contador" id="reloj">04:00:00</div>
+    </div>
+    <!-- --- FIN BANNER PROMO FLASH --- -->
+
+    <!-- SECCIÓN DEL QUIZ -->
     <div class="seccion-quiz">
         <h3 class="titulo-quiz">✨ ¿No sabes qué hacerte? ¡Descubre tu estilo! ✨</h3>
         
@@ -111,7 +126,6 @@
             <button class="btn-quiz" style="background:#fff0f5; color:#e62e6b; border:none;" onclick="reiniciarQuiz()">Volver a intentar 🔄</button>
         </div>
     </div>
-    <!-- --- FIN DEL QUIZ --- -->
 
     <div class="seccion">
         <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Políticas de Citas</div>
@@ -129,7 +143,7 @@
     <button class="boton-base boton-cita" onclick="window.open('https://wa.me/524443372745?text=¡Hola!%20Vengo%20de%20la%20página%20y%20quiero%20agendar%20una%20cita.', '_blank')">Agendar Cita Ahora</button>
 
     <script>
-        // Funciones anteriores intactas
+        // Funciones de las secciones y ruleta
         function abrirSeccion(el) {
             let cont = el.nextElementSibling;
             cont.style.display = (cont.style.display === "block") ? "none" : "block";
@@ -138,7 +152,7 @@
             document.getElementById('ruleta').style.transform = "rotate(" + (1440 + Math.random() * 360) + "deg)";
         }
 
-        // --- NUEVO: FUNCIONES DEL QUIZ ---
+        // Funciones del Quiz
         let recomendacionActual = "";
 
         function siguientePaso() {
@@ -162,6 +176,35 @@
             let mensajeWa = "¡Hola! Hice el test de estilo en su página y me salió: " + recomendacionActual + " ¡Me gustaría agendar cita para este servicio!";
             window.open('https://wa.me/524443372745?text=' + encodeURIComponent(mensajeWa), '_blank');
         }
+
+        // --- NUEVO: FUNCIÓN DEL RELOJ DE LA PROMOCIÓN ---
+        function iniciarReloj() {
+            let tiempoRestante = 14400; // 4 horas en segundos
+            let elementoReloj = document.getElementById('reloj');
+            
+            let intervalo = setInterval(function() {
+                let horas = Math.floor(tiempoRestante / 3600);
+                let minutos = Math.floor((tiempoRestante % 3600) / 60);
+                let segundos = tiempoRestante % 60;
+                
+                // Ponerles un cero a la izquierda si son menores a 10
+                horas = horas < 10 ? "0" + horas : horas;
+                minutos = minutos < 10 ? "0" + minutos : minutos;
+                segundos = segundos < 10 ? "0" + segundos : segundos;
+                
+                elementoReloj.innerText = horas + ":" + minutos + ":" + segundos;
+                
+                if (tiempoRestante > 0) {
+                    tiempoRestante--;
+                } else {
+                    clearInterval(intervalo);
+                    elementoReloj.innerText = "¡TIEMPO AGOTADO!";
+                }
+            }, 1000);
+        }
+        
+        // Arrancar el reloj en cuanto abra la página
+        iniciarReloj();
     </script>
 </body>
 </html>
