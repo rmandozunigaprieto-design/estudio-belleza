@@ -44,9 +44,16 @@
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-800px); } }
 
         /* Botones */
-        .boton-base { padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 50px; cursor: pointer; margin: 10px auto; display: block; font-family: 'Pacifico', cursive; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .boton-base { padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 50px; cursor: pointer; margin: 10px auto; display: block; font-family: 'Pacifico', cursive; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative; z-index: 10; }
         .boton-cotiza { background-color: #ff6f9c; color: white; }
         .boton-cita { background-color: #5c001f; color: white; padding: 18px 40px; font-size: 1.2em; margin: 30px auto; }
+
+        /* --- NUEVO: ESTILOS DEL QUIZ --- */
+        .seccion-quiz { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 2px dashed #ff6f9c; margin: 30px auto; width: 90%; max-width: 500px; border-radius: 25px; padding: 25px 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; z-index: 10; }
+        .titulo-quiz { color: #5c001f; font-family: 'Pacifico', cursive; font-size: 1.4em; margin-top: 0; margin-bottom: 15px; }
+        .btn-quiz { background: white; color: #e62e6b; border: 2px solid #e62e6b; padding: 12px 20px; margin: 8px auto; border-radius: 20px; cursor: pointer; font-weight: bold; width: 85%; display: block; transition: 0.3s; font-size: 1em; }
+        .btn-quiz:hover { background: #e62e6b; color: white; transform: scale(1.05); }
+        .texto-resultado { color: #4a1525; font-size: 1.1em; font-weight: bold; margin-bottom: 20px; }
     </style>
 </head>
 <body class="fade-in">
@@ -74,8 +81,37 @@
             <div class="slide"><img src="Logo.jpg" alt="Foto"></div>
             <div class="slide"><img src="Logo.jpg" alt="Foto"></div>
             <div class="slide"><img src="Logo.jpg" alt="Foto"></div>
+            <div class="slide"><img src="Logo.jpg" alt="Foto"></div>
+            <div class="slide"><img src="Logo.jpg" alt="Foto"></div>
+            <div class="slide"><img src="Logo.jpg" alt="Foto"></div>
+            <div class="slide"><img src="Logo.jpg" alt="Foto"></div>
         </div>
     </div>
+
+    <!-- --- NUEVO: SECCIÓN DEL QUIZ --- -->
+    <div class="seccion-quiz">
+        <h3 class="titulo-quiz">✨ ¿No sabes qué hacerte? ¡Descubre tu estilo! ✨</h3>
+        
+        <div id="quiz-paso-1">
+            <p style="color: #4a1525; font-weight: bold;">1. ¿Para qué ocasión te preparas?</p>
+            <button class="btn-quiz" onclick="siguientePaso()">☀️ Para mi día a día</button>
+            <button class="btn-quiz" onclick="siguientePaso()">🎉 Fiesta o Evento Especial</button>
+            <button class="btn-quiz" onclick="siguientePaso()">✈️ Próximas Vacaciones</button>
+        </div>
+
+        <div id="quiz-paso-2" style="display: none;">
+            <p style="color: #4a1525; font-weight: bold;">2. ¿Qué vibra buscas hoy?</p>
+            <button class="btn-quiz" onclick="mostrarResultado('¡Te recomendamos un Set de Pestañas Clásicas y Uñas Básicas! Ideal para un look elegante y natural. 💅')">🌸 Natural y elegante</button>
+            <button class="btn-quiz" onclick="mostrarResultado('¡Lo tuyo es el Volumen Ruso y unas Uñas Acrílicas de impacto! Lista para robar miradas. 🔥')">🔥 Llamativa y perrona</button>
+        </div>
+
+        <div id="quiz-resultado" style="display: none;">
+            <p class="texto-resultado" id="texto-recomendacion"></p>
+            <button class="boton-base boton-cotiza" onclick="mandarQuizWhatsApp()">¡Agendar mi estilo!</button>
+            <button class="btn-quiz" style="background:#fff0f5; color:#e62e6b; border:none;" onclick="reiniciarQuiz()">Volver a intentar 🔄</button>
+        </div>
+    </div>
+    <!-- --- FIN DEL QUIZ --- -->
 
     <div class="seccion">
         <div class="titulo-seccion" onclick="abrirSeccion(this)">▼ Políticas de Citas</div>
@@ -93,12 +129,38 @@
     <button class="boton-base boton-cita" onclick="window.open('https://wa.me/524443372745?text=¡Hola!%20Vengo%20de%20la%20página%20y%20quiero%20agendar%20una%20cita.', '_blank')">Agendar Cita Ahora</button>
 
     <script>
+        // Funciones anteriores intactas
         function abrirSeccion(el) {
             let cont = el.nextElementSibling;
             cont.style.display = (cont.style.display === "block") ? "none" : "block";
         }
         function girar() {
             document.getElementById('ruleta').style.transform = "rotate(" + (1440 + Math.random() * 360) + "deg)";
+        }
+
+        // --- NUEVO: FUNCIONES DEL QUIZ ---
+        let recomendacionActual = "";
+
+        function siguientePaso() {
+            document.getElementById('quiz-paso-1').style.display = 'none';
+            document.getElementById('quiz-paso-2').style.display = 'block';
+        }
+
+        function mostrarResultado(mensaje) {
+            recomendacionActual = mensaje;
+            document.getElementById('quiz-paso-2').style.display = 'none';
+            document.getElementById('quiz-resultado').style.display = 'block';
+            document.getElementById('texto-recomendacion').innerText = mensaje;
+        }
+
+        function reiniciarQuiz() {
+            document.getElementById('quiz-resultado').style.display = 'none';
+            document.getElementById('quiz-paso-1').style.display = 'block';
+        }
+
+        function mandarQuizWhatsApp() {
+            let mensajeWa = "¡Hola! Hice el test de estilo en su página y me salió: " + recomendacionActual + " ¡Me gustaría agendar cita para este servicio!";
+            window.open('https://wa.me/524443372745?text=' + encodeURIComponent(mensajeWa), '_blank');
         }
     </script>
 </body>
